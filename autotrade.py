@@ -117,8 +117,11 @@ def execute_buy():
     try:
         krw = upbit.get_balance("KRW")
         if krw > 5000:
-            result = upbit.buy_market_order("KRW-BTC", krw*0.9995)
-            print("Buy order successful:", result)
+            # result = upbit.buy_market_order("KRW-BTC", krw*0.9995)
+            # print("Buy order successful:", result)
+            print("Try Buy order at")
+            print(krw)
+            
     except Exception as e:
         print(f"Failed to execute buy order: {e}")
 
@@ -128,8 +131,10 @@ def execute_sell():
         btc = upbit.get_balance("BTC")
         current_price = pyupbit.get_orderbook(ticker="KRW-BTC")['orderbook_units'][0]["ask_price"]
         if current_price*btc > 5000:
-            result = upbit.sell_market_order("KRW-BTC", btc)
-            print("Sell order successful:", result)
+            # result = upbit.sell_market_order("KRW-BTC", btc)
+            # print("Sell order successful:", result)
+            print("Try sell")
+            print(btc)
     except Exception as e:
         print(f"Failed to execute sell order: {e}")
 
@@ -150,8 +155,8 @@ def make_decision_and_execute():
 
 if __name__ == "__main__":
     make_decision_and_execute()
-    schedule.every().hour.at(":01").do(make_decision_and_execute)
+    # schedule.every().hour.at(":01").do(make_decision_and_execute)
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(1)
