@@ -251,8 +251,10 @@ def execute_buy(percentage):
         krw_balance = upbit.get_balance("KRW")
         amount_to_invest = krw_balance * (percentage / 100)
         if amount_to_invest > 5000:  # Ensure the order is above the minimum threshold
-            result = upbit.buy_market_order("KRW-BTC", amount_to_invest * 0.9995)  # Adjust for fees
-            print("Buy order successful:", result)
+            # result = upbit.buy_market_order("KRW-BTC", amount_to_invest * 0.9995)  # Adjust for fees
+            # print("Buy order successful:", result)
+            print("Try Buy order at")
+            print(amount_to_invest)
     except Exception as e:
         print(f"Failed to execute buy order: {e}")
 
@@ -263,8 +265,11 @@ def execute_sell(percentage):
         amount_to_sell = btc_balance * (percentage / 100)
         current_price = pyupbit.get_orderbook(ticker="KRW-BTC")['orderbook_units'][0]["ask_price"]
         if current_price * amount_to_sell > 5000:  # Ensure the order is above the minimum threshold
-            result = upbit.sell_market_order("KRW-BTC", amount_to_sell)
-            print("Sell order successful:", result)
+            # result = upbit.sell_market_order("KRW-BTC", amount_to_sell)
+            # print("Sell order successful:", result)
+            print("Try Buy order at")
+            print(amount_to_sell)
+            
     except Exception as e:
         print(f"Failed to execute sell order: {e}")
 
@@ -309,18 +314,20 @@ def make_decision_and_execute():
 
 if __name__ == "__main__":
     initialize_db()
-    #testing
-    # schedule.every().minute.do(make_decision_and_execute)
+    make_decision_and_execute()
+    
+    # #testing
+    # # schedule.every().minute.do(make_decision_and_execute)
 
-    # Schedule the task to run at 00:01
-    schedule.every().day.at("00:01").do(make_decision_and_execute)
+    # # Schedule the task to run at 00:01
+    # schedule.every().day.at("00:01").do(make_decision_and_execute)
 
-    # Schedule the task to run at 08:01
-    schedule.every().day.at("08:01").do(make_decision_and_execute)
+    # # Schedule the task to run at 08:01
+    # schedule.every().day.at("08:01").do(make_decision_and_execute)
 
-    # Schedule the task to run at 16:01
-    schedule.every().day.at("16:01").do(make_decision_and_execute)
+    # # Schedule the task to run at 16:01
+    # schedule.every().day.at("16:01").do(make_decision_and_execute)
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(1)
